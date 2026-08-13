@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Ticket Triage</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro">
+        <p class="eyebrow">Portfolio Project 01</p>
+        <h1>AI Ticket Triage</h1>
+        <p>
+          Paste a customer support ticket. The app decides which team should own
+          it, how urgent it is, and what the first response should say.
+        </p>
+      </section>
+
+      <section class="demo-strip" aria-label="How the demo works">
+        <div>
+          <span>1</span>
+          <strong>Pick or write a ticket</strong>
+        </div>
+        <div>
+          <span>2</span>
+          <strong>Classify it</strong>
+        </div>
+        <div>
+          <span>3</span>
+          <strong>Review routing and response</strong>
+        </div>
+      </section>
+
+      <section class="samples" aria-label="Sample tickets">
+        <button class="sample active" type="button" data-sample="outage">
+          Login outage
+        </button>
+        <button class="sample" type="button" data-sample="billing">
+          Billing issue
+        </button>
+        <button class="sample" type="button" data-sample="security">
+          Security concern
+        </button>
+        <button class="sample" type="button" data-sample="feature">
+          Feature request
+        </button>
+      </section>
+
+      <section class="workspace">
+        <form id="ticket-form" class="panel form-panel">
+          <div class="panel-title">
+            <p>Incoming customer ticket</p>
+            <span>Edit this or use a sample above</span>
+          </div>
+
+          <label>
+            Subject
+            <input
+              id="subject"
+              name="subject"
+              value="Enterprise login outage"
+              required
+              minlength="3"
+              maxlength="160"
+            />
+          </label>
+
+          <div class="field-row">
+            <label>
+              Customer tier
+              <select id="customer_tier" name="customer_tier">
+                <option value="standard">Standard</option>
+                <option value="pro">Pro</option>
+                <option value="enterprise" selected>Enterprise</option>
+              </select>
+            </label>
+            <div class="hint-box">
+              <strong>Why tier matters</strong>
+              <span>Enterprise and Pro customers get higher urgency.</span>
+            </div>
+          </div>
+
+          <label>
+            Message
+            <textarea id="message" name="message" required minlength="10">
+Our production admin account is locked and multiple users cannot access the dashboard. This is blocking our morning operations and needs urgent help.</textarea
+            >
+          </label>
+
+          <button class="primary-action" type="submit">Classify ticket</button>
+        </form>
+
+        <section class="result panel" aria-live="polite">
+          <div class="panel-title">
+            <p>Classification result</p>
+            <span id="confidence">Confidence --</span>
+          </div>
+
+          <div class="decision-grid">
+            <div class="decision">
+              <span>Priority</span>
+              <strong id="priority" class="badge">Ready</strong>
+            </div>
+            <div class="decision">
+              <span>Owner team</span>
+              <strong id="department">--</strong>
+            </div>
+          </div>
+
+          <dl>
+            <div>
+              <dt>What happened?</dt>
+              <dd id="summary">Click “Classify ticket” to see the result.</dd>
+            </div>
+            <div>
+              <dt>Suggested customer reply</dt>
+              <dd id="response">--</dd>
+            </div>
+            <div>
+              <dt>Signals found</dt>
+              <dd id="tags" class="tag-list">--</dd>
+            </div>
+          </dl>
+        </section>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
